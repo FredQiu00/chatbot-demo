@@ -3,28 +3,38 @@ import { ReactComponent as FileIcon } from "../svgs/file-attach.svg";
 import { ReactComponent as SendIcon } from "../svgs/send.svg";
 
 const MsgInputArea = ({ onSend }) => {
-    // State to hold the input value
     const [inputValue, setInputValue] = useState('');
 
     const handleInputChange = (event) => {
         setInputValue(event.target.value);
     };
 
+    /** TODO:
+     * For prompt: Verify the validity of the message input (either fe or be, fe preferred, maybe call openai api to do this)
+     * For response: return from endpoints
+     */
     const handleSubmit = (event) => {
         event.preventDefault();
         if (inputValue.trim()) {
             const promptObj = {
-                "type": "prompt",
-                "text": inputValue,
-            }
-            //TODO: move this to chat-container, when a prompt is entered, call post endpoint and receive response (loading feature while requesting)
+                type: "prompt",
+                text: inputValue,
+            };
             const responseObj = {
-                "type": "response",
-                "text": "Figuring out what I should say..."
-            }
+                type: "response",
+                text: "Figuring out what I should say...",
+            };
+
             onSend(promptObj);
-            onSend(responseObj);
+            setTimeout(() => onSend(responseObj), 2000);
             setInputValue('');
+        }
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            handleSubmit(new Event('submit'));
         }
     };
 
@@ -50,6 +60,7 @@ const MsgInputArea = ({ onSend }) => {
                 placeholder="Enter your prompt"
                 value={inputValue}
                 onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
             ></textarea>
             <div>
                 <button
