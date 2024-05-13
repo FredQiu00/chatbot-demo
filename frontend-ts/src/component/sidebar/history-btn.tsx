@@ -1,13 +1,13 @@
 import React from "react";
 import { ReactComponent as ArchiveIcon } from "../svgs/archive.svg";
 import { HistoryBtnProps } from "./type";
-import { useUser } from "../user/user-info";
+import { useChat } from "../chat/chat-info";
 
 const MONTH = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 const HistoryBtn: React.FC<HistoryBtnProps> = ({ props, onRemove, isSelected }) => {
     const { title, today, chatId } = props;
-    const { setCurrentChat } = useUser();
+    const { setCurrentChat } = useChat();
     const date_created = today.getDate() + " " + MONTH[today.getMonth()];
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {

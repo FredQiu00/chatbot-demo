@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import HistoryBtn from "./history-btn";
 import { HistoryEntry, HistoryListProps } from "./type";
-import { useUser } from "../user/user-info";
+import { useChat } from "../chat/chat-info";
 
 const HistoryList: React.FC<HistoryListProps> = ({ props }) => {
     const { historyEntries, setHistoryEntries } = props;
-    const { currentChat } = useUser()
+    const { currentChat } = useChat()
     const removeEntry = (index: number) => {
         const newEntries = historyEntries.filter((_, i) => i !== index);
         setHistoryEntries(newEntries);

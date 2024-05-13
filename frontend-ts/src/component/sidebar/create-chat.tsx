@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactComponent as NewChatIcon } from "../svgs/newchat.svg";
 import { HistoryEntry, NewChatBtnProps } from "./type";
-import { useUser } from "../user/user-info";
+import { useChat } from "../chat/chat-info";
 
 const NewChatBtn: React.FC<NewChatBtnProps> = ({ props }) => {
     const { setHistoryEntries } = props;
@@ -9,7 +9,7 @@ const NewChatBtn: React.FC<NewChatBtnProps> = ({ props }) => {
     const demoTime = new Date();
     const demoChatId = "demo-chat-id";
 
-    const { setCurrentChat } = useUser();
+    const { setCurrentChat } = useChat();
 
     const handleClick = () => {
         const tempId = `${demoChatId}`
