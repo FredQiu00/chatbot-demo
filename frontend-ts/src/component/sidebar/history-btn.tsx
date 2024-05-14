@@ -6,9 +6,9 @@ import { useChat } from "../chat/chat-info";
 const MONTH = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 const HistoryBtn: React.FC<HistoryBtnProps> = ({ props, onRemove, isSelected }) => {
-    const { title, today, chatId } = props;
+    const { title, date, chatId } = props;
     const { setCurrentChat } = useChat();
-    const date_created = today.getDate() + " " + MONTH[today.getMonth()];
+    const date_created = date.getDate() + " " + MONTH[date.getMonth()];
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();

@@ -2,24 +2,17 @@ import React, { useState } from "react";
 import { ReactComponent as UserIcon } from "../svgs/user.svg";
 import { ReactComponent as SettingIcon } from "../svgs/setting.svg";
 import { ReactComponent as LogoIcon } from "../svgs/logo.svg";
+import { chatData } from "../chat/chat-demo";
 import { HistoryEntry } from "./type";
 import HistoryList from "./history-list";
 import NewChatBtn from "./create-chat";
 
 const SideBar: React.FC = () => {
-  // Fetch data to replace the hardcode below
-  const title = "Tailwind CSS";
-  const today = new Date();
-
   // for demo only, move this to user context once the db are set
   // correlated to chatIds field in User interface
-  const initialHistoryEntries = new Array(12).fill(null).map((_, index) => ({
-      title,
-      today,
-      chatId: `initial-chat-id-${index}`
-  }));
-  const [historyEntries, setHistoryEntries] = useState<HistoryEntry[]>(initialHistoryEntries);
-  
+  const demoHistoryEntries: HistoryEntry[] = chatData.map(chat => chat.meta);
+  const [historyEntries, setHistoryEntries] = useState<HistoryEntry[]>(demoHistoryEntries);
+
   return (
     <>
       <aside className="flex">

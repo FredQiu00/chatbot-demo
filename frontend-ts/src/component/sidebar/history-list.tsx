@@ -17,7 +17,7 @@ const HistoryList: React.FC<HistoryListProps> = ({ props }) => {
                 // replace props to entry once be is set
                 const input: HistoryEntry = {
                     title: entry.title,
-                    today: entry.today,
+                    date: entry.date,
                     chatId: entry.chatId,
                 }
                 return (

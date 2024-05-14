@@ -1,6 +1,6 @@
 export interface HistoryEntry {
     title: string;
-    today: Date;
+    date: Date;
     chatId: string;
 }
 

@@ -14,7 +14,7 @@ const NewChatBtn: React.FC<NewChatBtnProps> = ({ props }) => {
     const handleClick = () => {
         const newChat: HistoryEntry = {
             title: demoTitle,
-            today: demoTime,
+            date: demoTime,
             chatId: demoChatId,
         };
         console.log(newChat)

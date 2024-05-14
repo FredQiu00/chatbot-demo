@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import MsgInputArea from './message-input';
 import MessagePanel from './message-panel';
 import { Message, MessagePanelHandle } from './type'; // Ensure you have the correct path
@@ -6,10 +6,7 @@ import { useChat } from '../chat/chat-info';
 
 const Container: React.FC = () => {
     const messageEndRef = useRef<MessagePanelHandle>(null);
-    const {
-        currentWindow,
-        setCurrentWindow,
-    } = useChat();
+    const { currentWindow, setCurrentWindow } = useChat();
 
     const handleNewMessage = (newMessage: Message) => {
         setCurrentWindow(prevMessages => [...prevMessages, newMessage]);
