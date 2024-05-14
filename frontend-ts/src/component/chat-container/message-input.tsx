@@ -2,9 +2,11 @@ import React, { ChangeEvent, FormEvent, KeyboardEvent, useState } from "react";
 import { ReactComponent as FileIcon } from "../svgs/file-attach.svg";
 import { ReactComponent as SendIcon } from "../svgs/send.svg";
 import { MsgInputAreaProps, MessageType } from "./type";
+import { useChat } from "../chat/chat-info";
 
 const MsgInputArea: React.FC<MsgInputAreaProps> = ({ onSend }) => {
     const [inputValue, setInputValue] = useState('');
+    const { currentChat } = useChat();
 
     const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setInputValue(e.target.value);
@@ -16,7 +18,7 @@ const MsgInputArea: React.FC<MsgInputAreaProps> = ({ onSend }) => {
      */
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (inputValue.trim()) {
+        if (currentChat && inputValue.trim()) {
             const promptObj = {
                 type: MessageType.PROMPT,
                 content: inputValue,
@@ -28,8 +30,11 @@ const MsgInputArea: React.FC<MsgInputAreaProps> = ({ onSend }) => {
 
             onSend(promptObj);
             setTimeout(() => onSend(responseObj), 2000);
-            setInputValue('');
+        } else if (!currentChat) {
+            console.error('Please select a chat or create a new one');
         }
+        setInputValue('');
+
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {

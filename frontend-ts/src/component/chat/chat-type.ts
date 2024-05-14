@@ -1,20 +1,16 @@
 import { ReactNode } from "react";
-
-export interface Chat {
-    userPrompts: string;
-    aiResponse: string;
-}
+import { Message } from "../chat-container/type";
 
 export interface ChatBlock {
     chatId: string;
-    messages: Chat[];
+    messages: Message[];
 }
 
 export interface ChatContextProps {
     currentChat: string | null;
-    setCurrentChat: React.Dispatch<React.SetStateAction<string | null>>;
-    currentWindow: Chat[] | null;
-    setCurrentWindow: React.Dispatch<React.SetStateAction<Chat[] | null>>;
+    setCurrentChat: (chatId: string) => void,
+    currentWindow: Message[];
+    setCurrentWindow: React.Dispatch<React.SetStateAction<Message[]>>;
 }
 
 export interface ChatProviderProps {

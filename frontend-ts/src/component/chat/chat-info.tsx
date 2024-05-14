@@ -1,30 +1,43 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import {
-    Chat,
-    ChatContextProps,
-    ChatProviderProps,
-} from './chat-type';
+import { ChatContextProps, ChatProviderProps } from './chat-type';
+import { Message } from '../chat-container/type';
 
 const ChatContext = createContext<ChatContextProps | undefined>(undefined);
 
 export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
-    const [currentChat, setCurrentChat] = useState<string | null>(null);
-    const [currentWindow, setCurrentWindow] = useState<Chat[] | null>(null);
+    const [currentChat, setCurrentChatState] = useState<string | null>(null);
+    const [currentWindow, setCurrentWindow] = useState<Message[]>([]);
+    const [chatHistories, setChatHistories] = useState<{ [chatId: string]: Message[] }>({});
 
     useEffect(() => {
-        // fetch chat history given chat id: currentChat
-        console.log(currentChat);
-        // call set current window here
-    }, [currentChat])
+        if (currentChat) {
+            setCurrentWindow(chatHistories[currentChat] || []);
+        }
+    }, [currentChat, chatHistories]);
+
+    const setCurrentChat = (chatId: string) => {
+        // Save current chat window to chatHistories
+        if (currentChat) {
+            setChatHistories(prevHistories => ({
+                ...prevHistories,
+                [currentChat]: currentWindow,
+            }));
+        }
+
+        // Set the new chat ID
+        setCurrentChatState(chatId);
+    };
+
     const value = {
         currentChat,
         setCurrentChat,
         currentWindow,
         setCurrentWindow,
-    }
+    };
+
     return (
         <ChatContext.Provider value={value}>
-          {children}
+            {children}
         </ChatContext.Provider>
     );
 };

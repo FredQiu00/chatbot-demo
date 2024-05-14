@@ -12,15 +12,14 @@ const NewChatBtn: React.FC<NewChatBtnProps> = ({ props }) => {
     const { setCurrentChat } = useChat();
 
     const handleClick = () => {
-        const tempId = `${demoChatId}`
         const newChat: HistoryEntry = {
             title: demoTitle,
             today: demoTime,
-            chatId: tempId,
+            chatId: demoChatId,
         };
         console.log(newChat)
         setHistoryEntries((prevEntries) => [newChat, ...prevEntries]);
-        setCurrentChat(newChat.chatId + '0'); // hardcode for demo only
+        setCurrentChat(newChat.chatId); // hardcode for demo only
     }
 
     /**

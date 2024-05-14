@@ -15,17 +15,16 @@ const HistoryList: React.FC<HistoryListProps> = ({ props }) => {
         <div className="history-view h-3/4 space-y-4 overflow-y-auto border-b border-slate-300 my-2 px-2 py-4 dark:border-slate-700">
             {historyEntries.map((entry, index) => {
                 // replace props to entry once be is set
-                const tempId = `${entry.chatId}${index}`
                 const input: HistoryEntry = {
                     title: entry.title,
                     today: entry.today,
-                    chatId: tempId,
+                    chatId: entry.chatId,
                 }
                 return (
                     <HistoryBtn
                         key={index}
                         props={input}
-                        isSelected={currentChat === tempId}
+                        isSelected={currentChat === entry.chatId}
                         onRemove={() => removeEntry(index)}
                     />
                 )

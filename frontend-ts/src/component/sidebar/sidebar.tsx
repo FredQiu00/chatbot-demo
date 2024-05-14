@@ -10,11 +10,16 @@ const SideBar: React.FC = () => {
   // Fetch data to replace the hardcode below
   const title = "Tailwind CSS";
   const today = new Date();
-  const chatId = "initial-chat-id";
+
   // for demo only, move this to user context once the db are set
   // correlated to chatIds field in User interface
-  const [historyEntries, setHistoryEntries] = useState<HistoryEntry[]>(new Array(12).fill({ title, today, chatId }));
-
+  const initialHistoryEntries = new Array(12).fill(null).map((_, index) => ({
+      title,
+      today,
+      chatId: `initial-chat-id-${index}`
+  }));
+  const [historyEntries, setHistoryEntries] = useState<HistoryEntry[]>(initialHistoryEntries);
+  
   return (
     <>
       <aside className="flex">

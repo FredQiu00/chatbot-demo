@@ -12,11 +12,14 @@ const MessagePanel: ForwardRefRenderFunction<MessagePanelHandle, MessagePanelPro
                 panelRef.current.scrollTop = panelRef.current.scrollHeight;
             }
         }
-    }));
+    }), []);
 
     useEffect(() => {
         if (panelRef.current) {
-            panelRef.current.scrollTop = panelRef.current.scrollHeight;
+            const isAtBottom = panelRef.current.scrollHeight - panelRef.current.scrollTop === panelRef.current.clientHeight;
+            if (!isAtBottom) {
+                panelRef.current.scrollTop = panelRef.current.scrollHeight;
+            }
         }
     }, [messages]);
 
