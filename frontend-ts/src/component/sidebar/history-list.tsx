@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import HistoryBtn from "./history-btn";
 import { HistoryEntry, HistoryListProps } from "./type";
 import { useChat } from "../chat/chat-info";

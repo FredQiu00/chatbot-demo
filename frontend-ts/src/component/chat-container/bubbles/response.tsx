@@ -8,6 +8,7 @@ const ResponseBubble: React.FC<MessageProp> = ({ content }) => {
             <img
                 className="mr-2 h-8 w-8 rounded-full"
                 src="https://dummyimage.com/128x128/354ea1/ffffff&text=G"
+                alt="G"
             />
 
             <div

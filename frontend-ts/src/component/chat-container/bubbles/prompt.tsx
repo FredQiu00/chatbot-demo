@@ -7,6 +7,7 @@ const PromptBubble: React.FC<MessageProp> = ({ content }) => {
             <img
                 className="ml-2 h-8 w-8 rounded-full"
                 src="https://dummyimage.com/128x128/363536/ffffff&text=J"
+                alt="J"
             />
             <div
                 className="flex rounded-b-xl rounded-tl-xl bg-slate-50 p-4 dark:bg-slate-800 sm:max-w-md md:max-w-2xl"
