@@ -40,6 +40,8 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
         setCurrentChat,
         currentWindow,
         setCurrentWindow,
+        chatHistories,
+        setChatHistories,
     };
 
     return (

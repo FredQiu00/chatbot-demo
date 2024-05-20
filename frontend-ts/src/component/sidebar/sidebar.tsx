@@ -19,7 +19,7 @@ const SideBar: React.FC = () => {
         <div className="flex h-[100svh] w-60 flex-col overflow-y-auto bg-slate-50 pt-8 dark:border-slate-700 dark:bg-slate-900 sm:h-[100vh] sm:w-64">
           <div className="flex px-4">
             <LogoIcon className="h-7 w-7 text-blue-600" />
-            <h2 className="px-5 text-lg font-medium text-slate-800 dark:text-slate-200">
+            <h2 className="px-4 text-lg font-medium text-slate-800 dark:text-slate-200">
               Chats
             </h2>
           </div>
