@@ -10,7 +10,8 @@ const HistoryList: React.FC<HistoryListProps> = ({ props }) => {
         setCurrentChat,
         setCurrentWindow,
         chatHistories,
-        setChatHistories } = useChat();
+        setChatHistories
+    } = useChat();
 
     const removeEntry = (index: number) => {
         const entryToRemove = historyEntries[index];
