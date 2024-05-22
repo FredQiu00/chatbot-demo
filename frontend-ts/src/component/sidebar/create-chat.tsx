@@ -3,13 +3,15 @@ import { ReactComponent as NewChatIcon } from "../svgs/newchat.svg";
 import { ReactComponent as CloseIcon } from "../svgs/close.svg";
 import { HistoryEntry, NewChatBtnProps } from "./type";
 import { useChat } from "../chat/chat-info";
+import { useUser } from "../user/user-info";
 
 const NewChatBtn: React.FC<NewChatBtnProps> = ({ props }) => {
   const { setHistoryEntries } = props;
   const { setCurrentChat } = useChat();
+  const { usermeta, setUsermeta } = useUser();
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [chatTitle, setChatTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("")
+  const [description, setDescription] = useState<string>("");
 
   const handleCreateChat = () => {
     const newChat: HistoryEntry = {
@@ -21,6 +23,7 @@ const NewChatBtn: React.FC<NewChatBtnProps> = ({ props }) => {
     setCurrentChat(newChat.chatId);
     setModalOpen(false);
     setChatTitle('');
+    setUsermeta([...usermeta, description]);
     setDescription('');
   };
 

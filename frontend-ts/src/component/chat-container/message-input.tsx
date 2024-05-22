@@ -3,6 +3,8 @@ import { ReactComponent as FileIcon } from "../svgs/file-attach.svg";
 import { ReactComponent as SendIcon } from "../svgs/send.svg";
 import { MsgInputAreaProps, MessageType } from "./type";
 import { useChat } from "../chat/chat-info";
+import { inputResponseMap } from "./response-demo";
+
 
 const MsgInputArea: React.FC<MsgInputAreaProps> = ({ onSend }) => {
     const [inputValue, setInputValue] = useState('');
@@ -12,10 +14,18 @@ const MsgInputArea: React.FC<MsgInputAreaProps> = ({ onSend }) => {
         setInputValue(e.target.value);
     };
 
-    /** TODO:
-     * For prompt: Verify the validity of the message input (either fe or be, fe preferred, maybe call openai api to do this)
-     * For response: return from endpoints
-     */
+    const delayedSend = (input: string, response: string): number => {
+        const minLength = Math.min(input.length, response.length);
+        const maxLength = Math.max(input.length, response.length);
+        
+        // Generate a random number between minLength and maxLength
+        const randomNumber = Math.floor(Math.random() * (maxLength - minLength + 1) + minLength);
+        
+        // Calculate the timeout duration
+        const timeoutDuration = randomNumber * 2;
+        return timeoutDuration;
+    }
+
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (currentChat && inputValue.trim()) {
@@ -23,18 +33,20 @@ const MsgInputArea: React.FC<MsgInputAreaProps> = ({ onSend }) => {
                 type: MessageType.PROMPT,
                 content: inputValue,
             };
+            const responseContent = inputResponseMap[inputValue.trim()] || "I'm not sure how to respond to that.";
             const responseObj = {
-                type: MessageType.REPSONSE,
-                content: "Figuring out what I should say...",
+                type: MessageType.RESPONSE,
+                content: responseContent,
             };
 
             onSend(promptObj);
-            setTimeout(() => onSend(responseObj), 2000);
+            const time_delayed = delayedSend(inputValue.trim(), responseContent)
+            console.log(time_delayed);
+            setTimeout(() => onSend(responseObj), time_delayed);
         } else if (!currentChat) {
             console.error('Please select a chat or create a new one');
         }
         setInputValue('');
-
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {

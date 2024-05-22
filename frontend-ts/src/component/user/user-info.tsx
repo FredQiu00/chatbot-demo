@@ -9,10 +9,15 @@ const UserContext = createContext<UserContextProps | undefined>(undefined);
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
+    const [usermeta, setUsermeta] = useState<string[]>([])
 
     const value = {
         user,
         setUser,
+        usermeta,
+        setUsermeta,
+        // description,
+        // setDescription,
     }
     return (
         <UserContext.Provider value={value}>

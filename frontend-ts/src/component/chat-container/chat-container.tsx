@@ -25,8 +25,14 @@ const Container: React.FC = () => {
 
     return (
         <div className="flex h-[100vh] w-full flex-col">
-            <MessagePanel ref={messageEndRef} messages={currentWindow} />
-            {currentChat ? <MsgInputArea onSend={handleNewMessage} /> : <LandingContainer />}
+            {currentChat ? (
+                <>
+                    <MessagePanel ref={messageEndRef} messages={currentWindow} />
+                    <MsgInputArea onSend={handleNewMessage} />
+                </>
+            ) : (
+                <LandingContainer />
+            )}
         </div>
     );
 };

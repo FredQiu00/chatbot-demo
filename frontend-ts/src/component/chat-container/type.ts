@@ -4,7 +4,7 @@ export interface MessageProp {
 
 export enum MessageType {
     PROMPT = 'prompt',
-    REPSONSE = 'response',
+    RESPONSE = 'response',
 }
 
 export interface Message extends MessageProp {

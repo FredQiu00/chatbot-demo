@@ -11,6 +11,10 @@ export interface User {
 export interface UserContextProps {
     user: User | null;
     setUser: React.Dispatch<React.SetStateAction<User | null>>;
+    usermeta: string[];
+    setUsermeta: React.Dispatch<React.SetStateAction<string[]>>;
+//     description: string;
+//     setDescription: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface UserProviderProps {

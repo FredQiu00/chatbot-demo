@@ -4,7 +4,7 @@ import { MessageProp } from "../type";
 
 const ResponseBubble: React.FC<MessageProp> = ({ content }) => {
     return (
-        <div className="flex items-start">
+        <div className="flex items-start whitespace-pre-line">
             <img
                 className="mr-2 h-8 w-8 rounded-full"
                 src="https://dummyimage.com/128x128/354ea1/ffffff&text=G"
