@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ChatContextProps, ChatProviderProps } from './chat-type';
 import { Message } from '../chat-container/type';
-import { chatData } from './chat-demo';
 
 const ChatContext = createContext<ChatContextProps | undefined>(undefined);
 
@@ -9,12 +8,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
 
     const [currentChat, setCurrentChatState] = useState<string | null>(null);
     const [currentWindow, setCurrentWindow] = useState<Message[]>([]);
-    const [chatHistories, setChatHistories] = useState<{ [chatId: string]: Message[] }>(
-        chatData.reduce((acc, chat) => {
-            acc[chat.meta.chatId] = chat.messages;
-            return acc;
-        }, {} as { [chatId: string]: Message[] })
-    );
+    const [chatHistories, setChatHistories] = useState<{ [chatId: string]: Message[] }>({});
     
     useEffect(() => {
         if (currentChat) {

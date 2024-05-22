@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useUser } from "../user/user-info";
 import { ReactComponent as LogoutIcon } from "../svgs/logout.svg";
 import { ReactComponent as LogoIcon } from "../svgs/logo.svg";
-import { chatData } from "../chat/chat-demo";
 import { HistoryEntry } from "./type";
 import HistoryList from "./history-list";
 import NewChatBtn from "./create-chat";
@@ -10,8 +9,7 @@ import NewChatBtn from "./create-chat";
 const SideBar: React.FC = () => {
   // for demo only, move this to user context once the db are set
   // correlated to chatIds field in User interface
-  const demoHistoryEntries: HistoryEntry[] = chatData.map(chat => chat.meta);
-  const [historyEntries, setHistoryEntries] = useState<HistoryEntry[]>(demoHistoryEntries);
+  const [historyEntries, setHistoryEntries] = useState<HistoryEntry[]>([]);
 
   const { user, setUser } = useUser();
 
