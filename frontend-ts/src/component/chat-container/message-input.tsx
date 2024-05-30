@@ -3,12 +3,12 @@ import { ReactComponent as FileIcon } from "../svgs/file-attach.svg";
 import { ReactComponent as SendIcon } from "../svgs/send.svg";
 import { MsgInputAreaProps, MessageType } from "./type";
 import { useChat } from "../chat/chat-info";
-import { inputResponseMap } from "./response-demo";
-
+import axios from "axios";
 
 const MsgInputArea: React.FC<MsgInputAreaProps> = ({ onSend }) => {
     const [inputValue, setInputValue] = useState('');
     const { currentChat } = useChat();
+    const chat_url = `http://localhost:5001/chat/completion`;
 
     const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setInputValue(e.target.value);
@@ -26,14 +26,19 @@ const MsgInputArea: React.FC<MsgInputAreaProps> = ({ onSend }) => {
         return timeoutDuration;
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (currentChat && inputValue.trim()) {
             const promptObj = {
                 type: MessageType.PROMPT,
                 content: inputValue,
             };
-            const responseContent = inputResponseMap[inputValue.trim()] || "I'm not sure how to respond to that.";
+            const payload = {
+                model: "gpt-3.5-turbo-0613",
+                user_content: inputValue,
+            }
+            const response = await axios.post(chat_url, payload);
+            const responseContent = response.data.content;
             const responseObj = {
                 type: MessageType.RESPONSE,
                 content: responseContent,
